@@ -176,7 +176,7 @@ gulp.task('webshot', function() {
           ,renderDelay: 5000
           ,streamType: 'pdf'
           ,defaultWhiteBackground: true
-          // ,customCSS: '#download {display: none;}'
+          ,customCSS: '#download {display: none;}'
           // ,filename: 'Malawi'
         }));
 });

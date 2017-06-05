@@ -1,8 +1,12 @@
-//eventually needs to hit the omkserver.xyz
 $.ajax({
-	type: 'GET',
-	url: 'http://omkserver.com/omk/odk/submissions/form-name.json',
-	headers: { 'Authorization': "" },
+	async: true,
+  crossDomain: true,
+  url: "http://<some server url/form.json",
+  method: "GET",
+  headers: {
+    "authorization": "",
+    "cache-control": "no-cache",
+	},
 	dataType: 'json',
 	success: function(response){
 		init(response);
@@ -112,6 +116,7 @@ function createMarkers(data){
 			var content = '<p>Outside</p>';
 		}
 		content+='<p>Date: '+d.today+'</p>';
+		content+='<p>IMEI: '+d.imei+'</p>';
 
 		d.marker.bindPopup(content);
 	});
@@ -217,6 +222,11 @@ function generateReasonsChart(data){
                 	multiline: false
             	},
         		height: 130
+			},
+			y: {
+				tick: {
+									format: d3.format("d")
+							}
 			}
 		},
 		legend: {
@@ -263,9 +273,14 @@ function generateRefuseChart(data){
 			x: {
 				type: 'category',
 				tick: {
-        	rotate: 90,
+        	rotate: -45,
           multiline: false
         }
+			},
+			y: {
+				tick: {
+									format: d3.format("d")
+							}
 			}
 		},
 		legend: {
