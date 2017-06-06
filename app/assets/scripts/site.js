@@ -1,7 +1,7 @@
 $.ajax({
 	async: true,
   crossDomain: true,
-  url: "http://<some server url/form.json",
+  url: "http://my-server-url/form-name.json",
   method: "GET",
   headers: {
     "authorization": "",
@@ -242,11 +242,11 @@ function generateRefuseChart(data){
 	data.forEach(function(d){
 		if(d.inside!=undefined){
 			d.inside.inside_repeat.forEach(function(r){
-				if('reason_refus' in r){
-					if(!(r['reason_refus'] in tempData)){
-						tempData[r['reason_refus']] = 0;
+				if('reason_refuse' in r){
+					if(!(r['reason_refuse'] in tempData)){
+						tempData[r['reason_refuse']] = 0;
 					}
-					tempData[r['reason_refus']]++;
+					tempData[r['reason_refuse']]++;
 				}
 			});
 		}
