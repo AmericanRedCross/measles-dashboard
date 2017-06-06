@@ -13,7 +13,3 @@ highlighter: false
 baseurl: "/measles"
 
 permalink: pretty
-
-collections:
-  events:
-    output: true

@@ -25,7 +25,6 @@ var webshot = require('gulp-webshot');
 gulp.task('copy:assets', function(done) {
   return gulp.src('.tmp/assets/**')
     .pipe(gulp.dest('_site/assets'));
-
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +48,7 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer(autoprefixerOptions))
+    // .pipe(autoprefixer())
     .pipe(sourcemaps.write('.'))
     .pipe(browserSync.reload({stream:true}))
     .pipe(gulp.dest('.tmp/assets/styles'));
@@ -138,7 +138,7 @@ gulp.task('no-reload', function(done) {
 var environment = 'development';
 gulp.task('prod', function(done) {
   environment = 'production';
-  runSequence('clean', 'build', 'webshot', done);
+  runSequence('clean', 'build', done);
 });
 gulp.task('stage', function(done) {
   environment = 'stage';
@@ -147,7 +147,7 @@ gulp.task('stage', function(done) {
 
 // Removes jekyll's _site folder
 gulp.task('clean', function() {
-  return gulp.src(['_site', '.tmp', 'app/_data/events', 'app/_posts'], {read: false})
+  return gulp.src(['_site', '.tmp'], {read: false})
     .pipe(clean());
 });
 
@@ -160,7 +160,6 @@ function browserReload() {
     browserSync.reload();
   }
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //------------------------- Screenshots functions ----------------------------//
@@ -189,7 +188,7 @@ gulp.task('get-humans', function(){
 
   var getHumans = function(callback){
     var options = {
-      url: 'https://api.github.com/repos/americanredcross/measles_dashboard/contributors',
+      url: 'https://api.github.com/repos/americanredcross/measles-dashboard/contributors',
       headers: {
         'User-Agent': 'request'
       }
