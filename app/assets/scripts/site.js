@@ -7,7 +7,6 @@ $.ajax({
     "authorization": "",
     "cache-control": "no-cache",
 	},
-	dataType: 'json',
 	success: function(response){
 		init(response);
 	}
@@ -242,15 +241,20 @@ function generateRefuseChart(data){
 	data.forEach(function(d){
 		if(d.inside!=undefined){
 			d.inside.inside_repeat.forEach(function(r){
-				if('reason_refuse' in r){
-					if(!(r['reason_refuse'] in tempData)){
-						tempData[r['reason_refuse']] = 0;
-					}
-					tempData[r['reason_refuse']]++;
+				if('reason_refuse' in r ){
+					var refuses = r['reason_refuse'].split(' ');
+					refuses.forEach(function(refuse){
+						if(!(refuse in tempData)){
+							tempData[refuse] = 0;
+						}
+						tempData[refuse]++;
+					});
 				}
 			});
 		}
 	});
+
+	console.log(tempData);
 
 	var chartData = [['x'],['values']];
 
@@ -275,7 +279,8 @@ function generateRefuseChart(data){
 				tick: {
         	rotate: -45,
           multiline: false
-        }
+        },
+				height: 130
 			},
 			y: {
 				tick: {
